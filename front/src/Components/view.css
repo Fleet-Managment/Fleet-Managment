@@ -1,0 +1,38 @@
+/* Myblogs.css */
+.animated-search-container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    
+  align-items: center;
+  width: 75%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  border-radius: 30px;
+  padding: 5px 15px;
+
+   
+    
+  }
+  
+  .animated-search-input {
+    border-radius: 30px;
+    padding-left: 40px;
+    height: 45px;
+    width: 75%; /* Set the width to 75% of the window width */
+    max-width: 400px; /* Optional: Limit the maximum width if needed */
+  }
+  
+  .animated-search-icon {
+    background-color: #f1f1f1;
+    border-radius: 30px;
+    border: none;
+    height: 45px; /* Match the input height */
+    color: #a6a1a1; /* Adjust the color as needed */
+  }
+  
+  .animated-search-icon:hover {
+    background-color: #e9ecef;
+  }
+  

@@ -1,0 +1,22 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab@500&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lobster&family=Poppins:ital@1&family=Roboto+Slab&family=Signika:wght@500&display=swap');
+.register-body{
+    background-color: #212137;
+}
+.register-box{
+    background: #1488cc;
+    background: linear-gradient(0deg, #1488cc 0%, #2b32b2 100%);
+    border-radius: 10px;
+    text-align: center;
+    color: #03040e;
+    font-size: 3vh;
+    box-shadow: 1px 1px 40px 5px #6970ed;
+    font-family: 'Roboto Slab', serif;
+    font-family: 'DM Serif Display', serif;
+}
+.register-button{
+    background-color: #202383;
+}
+.register-link{
+    color: azure;
+}

@@ -1,0 +1,9 @@
+.navbar {
+    background-color: #f55a3e;
+}
+.card-body{
+    text-align: center;
+}
+img{
+    object-fit: contain;
+}
