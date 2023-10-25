@@ -17,6 +17,8 @@
 .login {
 	font-weight: bold;
 	margin: 0;
+	top: -50px;
+	position: relative;
 }
 
 
@@ -127,3 +129,45 @@
 img{
     width: 100%;
 }
+
+.common{
+	position: relative;
+	
+	
+	margin: 0 auto;
+	display: flex;
+	padding: 10px;
+
+	
+  
+  align-items: center;
+	top: 250px;
+	left: 50px; /* Adjust the top value to control the placement */
+	z-index: 3;
+	
+
+}
+
+/* Button Styles */
+button {
+	display: inline-block; /* Display the buttons inline */
+  margin: 8px; /* Add space between the buttons */
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;  }
+  
+
+  .selected {
+    background-color: #141c23;
+  }
+  
+
+  
+
+  

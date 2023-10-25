@@ -1,44 +1,68 @@
 
 
 import { Outlet } from "react-router-dom";
+import React from 'react'
+import { BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
+  BsListCheck, BsMenuButtonWideFill, BsFillGearFill}
+ from 'react-icons/bs'
+
+ import { FaTruckFast } from 'react-icons/fa6';
 
 
 
 const Layout = () => {
 
 
+  
+
+
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg bg-warning">
-  <div class="container-fluid">
-    <h2 class="navbar-brand" >Library</h2>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-       
-       
-        <li class="nav-item">
-          <a class="nav-link active" href="/Service">Service</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link active" href="/about">About</a>
-        </li>
-        
-        
-       
-      </ul>
-    
-    </div>
-    <br></br>
-  </div>
-</nav>
+
+
+<aside id="sidebar" >
+        <div className='sidebar-title'>
+            <div className='sidebar-brand'>
+                <FaTruckFast className='icon_header'/> FLEETOX
+            </div>
+            
+        </div>
+
+        <ul className='sidebar-list'>
+            <li className='sidebar-list-item'>
+                <a href="/">
+                    <BsGrid1X2Fill className='icon'/> Dashboard
+                </a>
+            </li>
+            <li className='sidebar-list-item'>
+                <a href="driver">
+                    <BsFillArchiveFill className='icon'/> Drivers
+                </a>
+            </li>
+            <li className='sidebar-list-item'>
+                <a href="driver">
+                    <BsFillGrid3X3GapFill className='icon'/> Vechiles
+                    </a>
+            </li>
+            <li className='sidebar-list-item'>
+                <a href="schedule">
+                    <BsPeopleFill className='icon'/> Schedule
+                </a>
+            </li>
+            <li className='sidebar-list-item'>
+                <a href="alerts">
+                    <BsListCheck className='icon'/> Alerts
+                </a>
+            </li>
+            <li className='sidebar-list-item'>
+                <a href="settings">
+                    <BsFillGearFill className='icon'/> Setting
+                </a>
+            </li>
+        </ul>
+    </aside>
+
       
       
       

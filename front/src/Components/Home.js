@@ -1,13 +1,87 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import React from 'react'
+import 
+{  BsBusFrontFill, BsFillBellFill}
+ from 'react-icons/bs'
+ import {FaUsers} from 'react-icons/fa'
+ import 
+ { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
+ from 'recharts';
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import photo1 from "../images/carousal-1.jpg"
-import photo2 from "../images/carousal-2.jpg"
-import photo3 from "../images/carousal-3.jpg"
-import Axios from "axios";
+
+
+
+import {
+  BsGrid1X2Fill,
+  BsFillArchiveFill,
+  BsFillGrid3X3GapFill,
+  BsPeopleFill,
+  BsListCheck,
+  BsFillGearFill,
+} from "react-icons/bs";
+
+import { FaTruckFast } from "react-icons/fa6";
 const Home = () => {
+
+
+
+
+
+
+
+  const data = [
+    {
+      name: 'Page A',
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: 'Page B',
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
+ 
+const driver = 300
+const vehicle = 50
+
+
+
+
 
 
   const navigate = useNavigate();
@@ -31,140 +105,190 @@ const Home = () => {
       const { status, user } = data;
       setUsername(user);
       return status
-        ? toast(`Hello ${user}`, {
+        ?alert(`Hello ${user}`, {
             position: "top-right",
           })
-        : (removeCookie("token"), navigate("/login"));
+        : (removeCookie("token"));
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
   
   
-  const Logout = () => {
-    removeCookie("token");
-    navigate("/login");
-  };
+  
 
 
   return ( 
       <> 
-      <body>
-        
-        {/* navbar */}
-        <nav class="navbar navbar-expand-lg bg-warning">
-  <div class="container-fluid">
-    <h2 class="navbar-brand" >Fleet Managment</h2>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/Service">Drivers</a>
-        </li>
-      
-        <li class="nav-item">
-          <a class="nav-link active" href="/about">Realtime Tracking</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/Service">Vechile</a>
-        </li>
-      
-        <li class="nav-item">
-          <a class="nav-link active" href="/about">Schdule</a>
-        </li>
-        </ul>
-      <form class="d-flex" >
-        <button class="btn btn-outline-success" onClick={Logout}>Logout</button>
-      </form>
-    </div>
-    <br></br>
-  </div>
-</nav>
-
-<br></br>
-
-
-
-
-
-
-
-
-
-
-<div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img
-              src={photo1}
-              class="d-block w-100"
-              alt="..."
-              style={{width:"200px",height:"550px",objectFit:"cover"}}
-            ></img>
-          </div>
-          <div class="carousel-item">
-            <img
-              src={photo2}
-              class="d-block w-100"
-              alt="..."
-              style={{width:"200px",height:"550px",objectFit:"cover"}}
-            ></img>
-          </div>
-          <div class="carousel-item">
-            <img
-              src={photo3}
-              class="d-block w-100"
-              alt="..."
-              style={{width:"200px",height:"550px",objectFit:"cover"}}
-            ></img>
-          </div>
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    <br></br>
-
-
    
 
-    
-  
 
-    </body>
-    <hr></hr>
-    <footer class="bg-light pb-5">
-      <div class="container text-center">
-        <div>
-          <div>Contact US</div>
-          <div>Phone:+91 7025047555</div>
-          <div>E-Mail:edu@gmail.com</div>
+
+    <div className="container-fluid">
+      <div className="row">
+        <aside id="sidebar" className="col-md-2 bg-dark">
+          <div className="sidebar-title">
+            <div className="sidebar-brand text-white">
+              <FaTruckFast className="icon_header" /> FLEETOX
+            </div>
+          </div>
+          <ul className="list-unstyled">
+            <li className="sidebar-list-item">
+              <a href="/" className="text-decoration-none text-white">
+                <div className="sidebar-item">
+                  <BsGrid1X2Fill className="icon" />
+                  <span className="sidebar-text">Dashboard</span>
+                </div>
+              </a>
+            </li>
+            <li className="sidebar-list-item">
+              <a href="driver" className="text-decoration-none text-white">
+                <div className="sidebar-item">
+                  <BsFillArchiveFill className="icon" />
+                  <span className="sidebar-text">Drivers</span>
+                </div>
+              </a>
+            </li>
+            <li className="sidebar-list-item">
+              <a href="vechile" className="text-decoration-none text-white">
+                <div className="sidebar-item">
+                  <BsFillGrid3X3GapFill className="icon" />
+                  <span className="sidebar-text">Vehicles</span>
+                </div>
+              </a>
+            </li>
+            <li className="sidebar-list-item">
+              <a href="schedule" className="text-decoration-none text-white">
+                <div className="sidebar-item">
+                  <BsPeopleFill className="icon" />
+                  <span className="sidebar-text">Schedule</span>
+                </div>
+              </a>
+            </li>
+            <li className="sidebar-list-item">
+              <a href="alerts" className="text-decoration-none text-white">
+                <div className="sidebar-item">
+                  <BsListCheck className="icon" />
+                  <span className="sidebar-text">Alerts</span>
+                </div>
+              </a>
+            </li>
+            <li className="sidebar-list-item">
+              <a href="settings" className="text-decoration-none text-white">
+                <div className="sidebar-item">
+                  <BsFillGearFill className="icon" />
+                  <span className="sidebar-text">Settings</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </aside>
+
+        <main className="col-md-10">
+
+        
+        <div className='main-title'>
+            <h3>DASHBOARD</h3>
         </div>
-        <p class="font-italic text-muted mb-0">
-          &copy; Copyrights education.com All rights reserved.
-        </p>
+
+        <div className='main-cards'>
+            <div className='card'>
+                <div className='card-inner'>
+                    <h3>DRIVER'S</h3>
+                    <FaUsers className='card_icon'/>
+                </div>
+                <h1>{driver}</h1>
+            </div>
+            <div className='card'>
+                <div className='card-inner'>
+                    <h3>VEHICLE'S</h3>
+                    <BsBusFrontFill className='card_icon'/>
+                </div>
+                <h1>{vehicle}</h1>
+            </div>
+            {/* <div className='card'>
+                <div className='card-inner'>
+                    <h3>CUSTOMERS</h3>
+                    <BsPeopleFill className='card_icon'/>
+                </div>
+                <h1>33</h1>
+            </div> */}
+            <div className='card'>
+                <div className='card-inner'>
+                    <h3>ALERTS</h3>
+                    <BsFillBellFill className='card_icon'/>
+                </div>
+                <h1>42</h1>
+            </div>
+        </div>
+
+        <div className='charts'>
+            <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+            }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="pv" fill="#8884d8" />
+                <Bar dataKey="uv" fill="#82ca9d" />
+                </BarChart>
+            </ResponsiveContainer>
+
+
+
+
+
+
+
+
+
+
+            <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                width={500}
+                height={300}
+                data={data}
+                margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                }}
+                >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                </LineChart>
+            </ResponsiveContainer>
+
+        </div>
+   
+          
+        </main>
       </div>
-    </footer>
-    <ToastContainer />
+    </div>
+
+
+
+
+
+
+
+
 
       </>
   );

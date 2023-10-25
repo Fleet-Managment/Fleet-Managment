@@ -1,0 +1,85 @@
+/* RegistrationPage.css */
+
+.registration-container {
+    background-color: #f7f7f7;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr; /* Three rows: user-options, selected form, other form */
+    grid-gap: 20px;
+  }
+  
+  .user-options {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .user-options button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .user-options button:hover {
+    background-color: #45a0e5;
+  }
+  
+  .selected {
+    background-color: #45a0e5;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Common styles for registration forms */
+  
+  .registration-form {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .registration-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .registration-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .registration-form button:hover {
+    background-color: #45a0e5;
+  }
+  
+  /* Responsive styles */
+  
+  @media screen and (max-width: 768px) {
+    .registration-container {
+      grid-template-rows: auto auto; /* Two rows: user-options and selected form */
+      grid-gap: 10px;
+    }
+  }
+  

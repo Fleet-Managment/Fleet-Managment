@@ -4,7 +4,6 @@ import updateBook from "../images/update_book.png";
 import addBook from "../images/add_book.png"
 
 import React, {useState } from 'react';
-import "./addBook.css"
 
 
 

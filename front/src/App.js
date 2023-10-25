@@ -1,37 +1,57 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./Components/Layout";
+import Schedule from "./Components/Schedule";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
-import Register from "./Components/Register";
+
+import Signup from "./Components/signup";
 import NoPage from "./Components/Nopage";
 import Service from "./Components/services";
-import View from "./Components/view";
+import Dash from "./Components/Dash";
 import UpdateBook from "./Components/update";
-import About from "./Components/About";
+
+import Driver from "./Components/Driver";
+import Vechile from "./Components/Vechile";
+import './App.css'
 
 const App=()=>{
+
+
+  
+
+
   return(
     
     <>
+
+
+
+
+
+
+
+
+
+
     <BrowserRouter>
       <Routes>
-          <Route path="/" element={<Layout />}>
-            
-            <Route path="*" element={<NoPage />} />
-            <Route path="service" element={<Service />} />
-            <Route path="view" element={<View />} />
-            <Route path="about" element={<About />} />
-          </Route>
+      <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route index element={<Home />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="driver" element={<Driver />} />
+          <Route path="vechile" element={<Vechile />} />
+          <Route path="schedule" element={<Schedule />} />
+          <Route path="dash" element={<Dash />} />
+            
+            
             <Route path="/update/:id" element={<UpdateBook />} />
             
           
       </Routes>
     </BrowserRouter>
+
+  
     </>
   )
 }
