@@ -1,22 +1,23 @@
-const MUser = require("../Models/UserModel");
+const User = require("../Models/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require('bcrypt');
 
 
 module.exports.Userlogin = async (req, res) => {
     try {
-      const { Email, Password } = req.body;
-      if(!Email || !Password ){
+      const { email, password } = req.body;
+      console.log({email},{password})
+      if(!email || !password ){
         return res.json({message:'All fields are required'})
       }
-      const user = await MUser.findOne({ Email });
+      const user = await User.findOne({ email });
+      console.log({user})
       if(!user){
-        return res.json({message:'Incorrect  email' }) 
+        return res.json({message:'Incorrect password or email' }) 
       }
-      const password =  await bcrypt.hash(Password, 12);
       const auth = await bcrypt.compare(password,user.hpassword)
       if (!auth) {
-        return res.json({message:'Incorrect password ' }) 
+        return res.json({message:'Incorrect password or email' }) 
       }
        const token = createSecretToken(user._id);
        res.cookie("token", token, {

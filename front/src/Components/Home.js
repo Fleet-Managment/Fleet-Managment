@@ -93,9 +93,9 @@ const vehicle = 50
 
     const verifyCookie = async () => {
       
-      // if (!cookies.token) {
-      //   navigate("/login");
-      // }
+      if (!cookies.token) {
+        navigate("/login");
+      }
       const { data } = await axios.post(
         "http://localhost:4000",
         {},

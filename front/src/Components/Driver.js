@@ -21,8 +21,8 @@ function Driver() {
   useEffect(() => {
     const filtered = fdata.filter(
       (user) =>
-        user.Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        user.Licence.toLowerCase().includes(searchQuery.toLowerCase())
+        user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.licence.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFiltereduser(filtered);
   }, [fdata, searchQuery]);
@@ -141,10 +141,10 @@ function Driver() {
       <tbody>
         {filtereduser.map((user) => (
           <tr key={user._id}>
-            <td>{user.Name}</td>
-            <td>{user.Licence}</td>
-            <td>{user.Email}</td>
-            <td>{user.Phone}</td>
+            <td>{user.name}</td>
+            <td>{user.licence}</td>
+            <td>{user.email}</td>
+            <td>{user.phone}</td>
             <td>
               <a href={`/update/${user._id}`} className="btn btn-primary me-2">
                 Update

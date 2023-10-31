@@ -6,19 +6,19 @@ import './signup.css';
 function App() {
   const [selectedUser, setSelectedUser] = useState('driver');
   const [uformData, setuFormData] = useState({
-    Name: '',
-    Phone: '',
-    Licence: '',
-    Password: '',
-    Email: '',
+    name: '',
+    phone: '',
+    licence: '',
+    password: '',
+    email: '',
     // Add more fields as needed
   });
 
   const [aformData, setaFormData] = useState({
-    Name: '',
-    Phone: '',
-    Email: '',
-    Password: ''
+    name: '',
+    phone: '',
+    email: '',
+    password: ''
     // Add more fields as needed
   });
 
@@ -107,7 +107,7 @@ function App() {
             <div>
               <input
                 type="text"
-                name="Name"
+                name="name"
                 placeholder=" Name"
                 onChange={handleuInputChange}
                 required
@@ -117,7 +117,7 @@ function App() {
             <div>
               <input
                 type="number"
-                name="Phone"
+                name="phone"
                 placeholder="Enter Number"
                 onChange={handleuInputChange}
                 required
@@ -126,7 +126,7 @@ function App() {
             <div>
               <input
                 type="text"
-                name="Licence"
+                name="licence"
                 placeholder="Licence Number"
                 onChange={handleuInputChange}
                 required
@@ -135,7 +135,7 @@ function App() {
             <div>
               <input
                 type="text"
-                name="Email"
+                name="email"
                 placeholder="Enter Email"
                 onChange={handleuInputChange}
                 required
@@ -162,7 +162,7 @@ function App() {
             <div>
               <input
                 type="text"
-                name="Name"
+                name="name"
                 placeholder="Enter Name"
                 onChange={handleaInputChange}
                 required
@@ -172,7 +172,7 @@ function App() {
             <div>
               <input
                 type="number"
-                name="Phone"
+                name="phone"
                 placeholder="Enter Phone Number"
                 onChange={handleaInputChange}
                 required
@@ -181,8 +181,9 @@ function App() {
             <div>
               <input
                 type="text"
-                name="Email"
+                name="email"
                 placeholder="Enter Email"
+                
                 onChange={handleaInputChange}
                 required
               />
@@ -190,7 +191,7 @@ function App() {
             <div>
               <input
                 type="password"
-                name="Password"
+                name="password"
                 placeholder="Enter Password"
                 onChange={handleaInputChange}
                 required

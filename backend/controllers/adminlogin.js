@@ -11,6 +11,7 @@ module.exports.Adminlogin = async (req, res) => {
         return res.json({message:'All fields are required'})
       }
       const user = await User.findOne({ email });
+      console.log({user})
       if(!user){
         return res.json({message:'Incorrect password or email' }) 
       }
