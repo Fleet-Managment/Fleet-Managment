@@ -5,17 +5,17 @@ const bcrypt = require('bcrypt');
 
 module.exports.Adminlogin = async (req, res) => {
     try {
-      const { email, password } = req.body;
-      console.log({email},{password})
-      if(!email || !password ){
+      const { Email, Password } = req.body;
+      console.log({Email},{Password})
+      if(!Email || !Password ){
         return res.json({message:'All fields are required'})
       }
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ Email });
       console.log({user})
       if(!user){
         return res.json({message:'Incorrect password or email' }) 
       }
-      const auth = await bcrypt.compare(password,user.hpassword)
+      const auth = await bcrypt.compare(Password,user.Hpassword)
       if (!auth) {
         return res.json({message:'Incorrect password or email' }) 
       }

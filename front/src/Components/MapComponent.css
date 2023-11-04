@@ -1,0 +1,50 @@
+/* Style for the map container */
+/* .map-container {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  height: 100%;
+  } */
+  
+  /* Style for the search bar */
+  .search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .search-bar button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .search-bar button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1); /* Adjust the scaling factor as needed */
+  }
+  
+  /* Animation when displaying the route on the map */
+  .route-displayed {
+    transform: scale(1.05); /* Adjust the scaling factor as needed */
+    transition: transform 0.5s;
+  }
+  
+  /* Additional styles for the map or other elements can be added here */
+  

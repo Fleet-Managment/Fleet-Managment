@@ -11,21 +11,42 @@ function App() {
     licence: '',
     password: '',
     email: '',
+    image: '',
+    // Add more fields as needed
+  });
+  const { name,phone,licence,password,email} = uformData;
+
+
+  const [aformData, setaFormData] = useState({
+    Name: '',
+    Phone: '',
+    Email: '',
+    Password: ''
     // Add more fields as needed
   });
 
-  const [aformData, setaFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    password: ''
-    // Add more fields as needed
-  });
+  const { Name,Phone,Email,Password} = aformData;
 
   const navigate = useNavigate();
 
   const handleUserChange = (userType) => {
     setSelectedUser(userType);
+  };
+
+
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setuFormData({
+          ...uformData,
+          image: reader.result, // Store the base64 encoded image
+        });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleuInputChange = (e) => {
@@ -108,6 +129,7 @@ function App() {
               <input
                 type="text"
                 name="name"
+                value={name}
                 placeholder=" Name"
                 onChange={handleuInputChange}
                 required
@@ -116,8 +138,9 @@ function App() {
           
             <div>
               <input
-                type="number"
+                type="text"
                 name="phone"
+                value={phone}
                 placeholder="Enter Number"
                 onChange={handleuInputChange}
                 required
@@ -127,6 +150,7 @@ function App() {
               <input
                 type="text"
                 name="licence"
+                value={licence}
                 placeholder="Licence Number"
                 onChange={handleuInputChange}
                 required
@@ -136,6 +160,7 @@ function App() {
               <input
                 type="text"
                 name="email"
+                value={email}
                 placeholder="Enter Email"
                 onChange={handleuInputChange}
                 required
@@ -145,11 +170,29 @@ function App() {
               <input
                 type="password"
                 name="password"
+                value={password}
                 placeholder="Enter Password"
                 onChange={handleuInputChange}
                 required
               />
             </div>
+            <div>
+            
+            <label style={{ color: "black" }}>
+                      Add Profile Photo
+                    </label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="image"
+                      placeholder='.jpeg file'
+                      onChange={handleImageChange}
+                      
+                      accept="image/*"
+                    ></input>
+                  </div>
+
+          
             {/* Additional driver-specific fields */}
           </form>
           <button onClick={handleURegistration}>Register as Driver</button>
@@ -162,7 +205,8 @@ function App() {
             <div>
               <input
                 type="text"
-                name="name"
+                name="Name"
+                value={Name}
                 placeholder="Enter Name"
                 onChange={handleaInputChange}
                 required
@@ -172,7 +216,8 @@ function App() {
             <div>
               <input
                 type="number"
-                name="phone"
+                name="Phone"
+                value={Phone}
                 placeholder="Enter Phone Number"
                 onChange={handleaInputChange}
                 required
@@ -181,7 +226,8 @@ function App() {
             <div>
               <input
                 type="text"
-                name="email"
+                name="Email"
+                value={Email}
                 placeholder="Enter Email"
                 
                 onChange={handleaInputChange}
@@ -191,7 +237,8 @@ function App() {
             <div>
               <input
                 type="password"
-                name="password"
+                name="Password"
+                value={Password}
                 placeholder="Enter Password"
                 onChange={handleaInputChange}
                 required
@@ -207,3 +254,7 @@ function App() {
 }
 
 export default App;
+
+
+
+

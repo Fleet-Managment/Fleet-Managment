@@ -14,7 +14,7 @@ import {
 import { FaTruckFast } from "react-icons/fa6";
 
 
-const Dash = () => {
+const Data = () => {
   const [cookies,removeCookie] = useCookies();
 
 
@@ -31,10 +31,7 @@ const Dash = () => {
 
 
 
-    const [fdata, setFData] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [filtereduser, setFiltereduser] = useState(fdata);
-
+ 
     
     useEffect(() => {
 
@@ -51,7 +48,7 @@ const Dash = () => {
         );
         
         const { status, user } = data;
-        setSearchQuery(user);
+      
         return status
           ? console.log(`Hello ${user}`)
           : (removeCookie("token"), navigate("/login"));
@@ -61,25 +58,60 @@ const Dash = () => {
 
 
 
-
-
-    useEffect(() => {
-      const filtered = fdata.filter(
-        (Schedule) =>
-         Schedule.driver.toLowerCase().includes(searchQuery.toLowerCase()) 
-      );
-      setFiltereduser(filtered);
-    }, [fdata, searchQuery]);
-  
-    useEffect(() => {
-      Axios.get("http://localhost:4000/schedule").then((res) => {
-        setFData(res.data);
+    const [inputValue, setInputValue] = useState({
+        business:"",
+        expenses:"",
       });
-    }, []);
+    
+      const { business,expenses } = inputValue;
+    
+      const handleOnChange = (e) => {
+        const {id, value } = e.target;
+        setInputValue({
+          ...inputValue,
+          [id]: value,
+        });
+      };
+    
+     
+    
+     
+    
+      
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+          
+          try {
+            const { data } = await Axios.post(
+              "http://localhost:4000/adddata",
+              {
+                ...inputValue,
+              },
+              { withCredentials: true   }
+            );
+            const { success, message } = data;
+            if (success) {
+              alert("data Added Successfully !!!")
+             
+            } else {
+              
+              alert(message)
+            }
+          } catch (error) {
+            console.log(error);
+          }
+          setInputValue({
+            ...inputValue,
+            business:"",
+            expenses:"",
+            
+          });
+        };
 
-    console.log({filtereduser})
-  
 
+
+
+    
   
     
   
@@ -142,40 +174,50 @@ const Dash = () => {
         <main className="col-md-10">
       <div className="myblogs-container p-4">
         <h3 className="text-center text-light mt-4 mb-3" style={{ fontWeight: "bold", fontSize: "34px" }}>
-          Scheduled
-        </h3>
-        <div className="container">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>From</th>
-                <th>To</th>
-                <th>Time</th>
-                <th>Vehicle</th>
-              
-              </tr>
-            </thead>
-            <tbody>
-              {filtereduser.map((Schedule) => (
-                <tr key={Schedule._id}>
-                  <td>{Schedule.from}</td>
-                  <td>{Schedule.to}</td>
-                  <td>{Schedule.time}</td>
-                  <td>{Schedule.vechile}</td>
-                 
-                  
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div>
-      <h3 className="text-center text-light mt-4 mb-3" style={{ fontWeight: "bold", fontSize: "34px" }}>
-          Parking at Manglore KSRTC DEPOT
+          Data Entry
         </h3>
 
+        <form  onSubmit={handleSubmit}>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">
+                      Total Buisness
+                    </label>
+                    <input
+                       type="text"
+                       className="form-control"
+                       id="business"
+                       placeholder="Enter the total buisness"
+                       value={business}
+                       onChange={handleOnChange}
+                       required
+                      aria-describedby="emailHelp"
+                    ></input>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">
+                      expenses
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="expenses"
+                        placeholder="Enter the daily expences"
+                        value={expenses}
+                        onChange={handleOnChange}
+                        required
+                    ></input>
+                  </div>
+                 
+                
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+                </form>
+        
       </div>
+      
     </main>
 
         
@@ -194,4 +236,4 @@ const Dash = () => {
      );
 }
  
-export default Dash;
+export default Data;

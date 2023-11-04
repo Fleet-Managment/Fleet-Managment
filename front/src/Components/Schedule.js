@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import {
     BsGrid1X2Fill,
     BsFillArchiveFill,
@@ -14,61 +16,113 @@ import {
 
 const Schedule = () => {
 
-    const [inputValue, setInputValue] = useState({
-        place: "",
-        time: "",
-        vechile: "",
-        driver: "",
-        contact:"",
-        
+  const navigate = useNavigate();
+  
+
+  const Logout = () => {
+   
+    navigate("/login");
+  };
+
+  const [selectedOption1, setSelectedOption1] = useState('');
+  const [selectedOption2, setSelectedOption2] = useState('');
+
+  // State for additional form fields
+  const [formData, setFormData] = useState({
+    from: '',
+    to: '',
+    time: '',
+    
+  });
+
+
+  // State to store the data fetched from the backend
+  const [driver, setdriver] = useState([]);
+  const [vechile, setvechile] = useState([]);
+
+  // Fetch data for the dropdowns from the backend
+  useEffect(() => {
+    // Fetch data for the first dropdown
+    Axios.get('http://localhost:4000/vechile')
+      .then((response) => {
+        setdriver(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data for dropdown 1:', error);
       });
 
-      const { place,time,vechile,driver,contact } = inputValue;
+    // Fetch data for the second dropdown
+    Axios.get('http://localhost:4000/user')
+      .then((response) => {
+        setvechile(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data for dropdown 2:', error);
+      });
+  }, []);
 
+  // Event handler for dropdown selection change
+  const handleDropdown1Change = (e) => {
+    setSelectedOption1(e.target.value);
+  };
 
-      const handleOnChange = (e) => {
-        const {id, value } = e.target;
-        setInputValue({
-          ...inputValue,
-          [id]: value,
+  const handleDropdown2Change = (e) => {
+    setSelectedOption2(e.target.value);
+  };
+
+  // Event handler for form field change
+  const handleFieldChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value,
+    });
+  };
+
+  // Event handler for form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Send selected data to the backend along with additional form fields
+    const dataToSend = {
+      driver: selectedOption2,
+      vechile: selectedOption1,
+      ...formData,
+    };
+
+    Axios.post('http://localhost:4000/addschedule', dataToSend)
+      .then((response) => {
+        alert("Sheduled successfully");
+        // Handle success
+        console.log('Data sent successfully:', response.data);
+        setSelectedOption1('');
+        setSelectedOption2('');
+        setFormData({
+          from: '',
+          to: '',
+          time: '',
         });
-      };
+      })
+      .catch((error) => {
+        // Handle error
+        console.error('Error sending data:', error);
+        // alert("Sheduled successfully");
+      });
+  };
 
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        try {
-          const { data } = await Axios.post(
-            "http://localhost:4000/addschedule",
-            {
-              ...inputValue,
-            },
-            { withCredentials: true   }
-          );
-          const { success, message } = data;
-          if (success) {
-            alert("Scheduled Successfully !!!")
-           
-          } else {
-            
-            alert(message)
-          }
-        } catch (error) {
-          console.log(error);
-        }
-        setInputValue({
-          ...inputValue,
-        place: "",
-        time: "",
-        vechile: "",
-        driver: "",
-        contact:"",
-          
-          
-        });
-      };
+ 
 
+
+
+ 
+
+
+   
+     
+
+
+      
 
 
 
@@ -82,7 +136,7 @@ const Schedule = () => {
     useEffect(() => {
       const filtered = fdata.filter(
         (Schedule) =>
-         Schedule.place.toLowerCase().includes(searchQuery.toLowerCase()) 
+         Schedule.driver.toLowerCase().includes(searchQuery.toLowerCase()) 
       );
       setFiltereduser(filtered);
     }, [fdata, searchQuery]);
@@ -149,20 +203,14 @@ const Schedule = () => {
               </a>
             </li>
             <li className="sidebar-list-item">
-              <a href="alerts" className="text-decoration-none text-white">
+              
                 <div className="sidebar-item">
-                  <BsListCheck className="icon" />
-                  <span className="sidebar-text">Alerts</span>
+                 
+                 
+                    <button class="btn btn-outline-success" onClick={Logout}>Logout</button>
+                  
                 </div>
-              </a>
-            </li>
-            <li className="sidebar-list-item">
-              <a href="settings" className="text-decoration-none text-white">
-                <div className="sidebar-item">
-                  <BsFillGearFill className="icon" />
-                  <span className="sidebar-text">Settings</span>
-                </div>
-              </a>
+             
             </li>
           </ul>
         </aside>
@@ -207,89 +255,94 @@ const Schedule = () => {
         <div>
 
 
-        <form  onSubmit={handleSubmit}>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">
-                      Place
-                    </label>
-                    <input
-                       type="text"
-                       className="form-control"
-                       id="place"
-                       placeholder="Enter the places eg(place1 - place2)"
-                       value={place}
-                       onChange={handleOnChange}
-                       required
-                      aria-describedby="emailHelp"
-                    ></input>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">
-                      Time
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="time"
-                        placeholder="Enter timings eg(start - end)"
-                        value={time}
-                        onChange={handleOnChange}
-                        required
-                    ></input>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">
-                     Vechile
-                    </label>
-                    <input
-                       type="text"
-                       className="form-control"
-                       id="vechile"
-                       placeholder="Enter the vechile number"
-                       value={vechile}
-                       onChange={handleOnChange}
-                       required
-                    ></input>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">
-                      Driver
-                    </label>
-                    <input
-                     type="text"
-                     className="form-control"
-                     id="driver"
-                     placeholder="Enter Driver name"
-                     value={driver}
-                     onChange={handleOnChange}
-                     required
-                    ></input>
-                   
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">
-                      Contact
-                    </label>
-                    <input
-                     type="Number"
-                     className="form-control"
-                     id="contact"
-                     placeholder="Enter Driver phone number"
-                     value={contact}
-                     onChange={handleOnChange}
-                     required
-                    ></input>
-                   
-                  </div>
-                  
+        <form onSubmit={handleSubmit}>
+  <div class="mb-3">
+    <label for="from" class="form-label">
+      From
+    </label>
+    <input
+      type="text"
+      className="form-control"
+      id="from"
+      placeholder="Enter the starting place"
+      value={formData.from}
+          onChange={handleFieldChange}
+      required
+    ></input>
+  </div>
+  <div class="mb-3">
+    <label for="to" class="form-label">
+      To
+    </label>
+    <input
+      type="text"
+      className="form-control"
+      id="to"
+      placeholder="Enter the destination place"
+      value={formData.to}
+          onChange={handleFieldChange}
+      required
+    ></input>
+  </div>
+  <div class="mb-3">
+    <label for="time" class="form-label">
+      Time
+    </label>
+    <input
+      type="text"
+      className="form-control"
+      id="time"
+      placeholder="Enter timings eg (start - end)"
+      value={formData.time}
+      onChange={handleFieldChange}
+      required
+    ></input>
+  </div>
+  <div class="mb-3">
+    
+  </div>
+  <div class="mb-3">
+  <label htmlFor="dropdown2"  class="form-label">Driver</label>
+        <select
+          id="dropdown2"
+          className="form-select"
+          value={selectedOption2}
+          onChange={handleDropdown2Change}
+        >
+          <option value="">Select an option</option>
+          {vechile.map((option) => (
+            <option key={option.id} value={option.name}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="dropdown1"  class="form-label">vechile</label>
+        <select
+          id="dropdown1"
+          className="form-select"
+          value={selectedOption1}
+          onChange={handleDropdown1Change}
+        >
+          <option value="">Select an option</option>
+          {driver.map((option) => (
+            <option key={option.id} value={option.plate}>
+               {option.plate}
+            </option>
+          ))}
+        </select>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      Close
+    </button>
+    <button type="submit" class="btn btn-primary">
+      Schedule
+    </button>
+  </div>
+</form>
 
-                
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Schedule</button>
-                </div>
 
-                </form>
     
    </div> 
       </div>
@@ -314,22 +367,24 @@ const Schedule = () => {
   <table className="table">
     <thead>
       <tr>
-        <th>Place</th>
+        <th>From</th>
+        <th>To</th>
         <th>Time</th>
         <th>Vehicle</th>
         <th>Driver</th>
-        <th>Contact</th>
+        
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       {filtereduser.map((Schedule) => (
         <tr key={Schedule._id}>
-          <td>{Schedule.place}</td>
+          <td>{Schedule.from}</td>
+          <td>{Schedule.to}</td>
           <td>{Schedule.time}</td>
           <td>{Schedule.vechile}</td>
           <td>{Schedule.driver}</td>
-          <td>{Schedule.contact}</td>
+          
           <td>
             <button
               className="btn btn-danger"

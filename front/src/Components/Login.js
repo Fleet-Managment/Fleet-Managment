@@ -12,10 +12,10 @@ const Login = () => {
   const AdminLogin = () => {
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState({
-      email: "",
-      password: "",
+      Email: "",
+      Password: "",
     });
-    const { email, password } = inputValue;
+    const { Email, Password } = inputValue;
 
     const handleOnChange = (e) => {
       const { name, value } = e.target;
@@ -58,8 +58,8 @@ const Login = () => {
       }
       setInputValue({
         ...inputValue,
-        email: "",
-        password: "",
+        Email: "",
+        Password: "",
       });
     }
 
@@ -73,8 +73,8 @@ const Login = () => {
               <div className="mb-3">
                 <input
                   type="email"
-                  name="email"
-                  value={email}
+                  name="Email"
+                  value={Email}
                   className="form-control"
                   placeholder="Enter your email"
                   onChange={handleOnChange}
@@ -83,8 +83,8 @@ const Login = () => {
               <div className="mb-3">
                 <input
                   type="password"
-                  name="password"
-                  value={password}
+                  name="Password"
+                  value={Password}
                   className="form-control"
                   placeholder="Enter your password"
                   onChange={handleOnChange}

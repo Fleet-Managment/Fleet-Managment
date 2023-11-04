@@ -1,25 +1,25 @@
 const mongoose = require("mongoose");
 
 
-const userSchema = new mongoose.Schema({
-  email: {
+const AdminSchema = new mongoose.Schema({
+  Email: {
     type: String,
     required: [true, "Your email address is required"],
-    unique: true,
+    
   },
-  name: {
+  Name: {
     type: String,
     required: [true, "Your Name is required"],
   },
-  phone: {
+  Phone: {
     type: Number,
     required: [true, "Your Phone Number is required"],
   },
-  hpassword: {
+  Hpassword: {
     type: String,
     required: [true, "Your password is required"],
   },
-  createdAt: {
+  CreatedAt: {
     type: Date,
     default: new Date(),
   },
@@ -27,4 +27,4 @@ const userSchema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model("Admin", userSchema);
+module.exports = mongoose.model("Admin", AdminSchema);

@@ -66,18 +66,16 @@ const Dash = () => {
     useEffect(() => {
       const filtered = fdata.filter(
         (Schedule) =>
-         Schedule.driver.toLowerCase().includes(searchQuery.toLowerCase()) 
+         Schedule.name.toLowerCase().includes(searchQuery.toLowerCase()) 
       );
       setFiltereduser(filtered);
     }, [fdata, searchQuery]);
   
     useEffect(() => {
-      Axios.get("http://localhost:4000/schedule").then((res) => {
+      Axios.get("http://localhost:4000/user").then((res) => {
         setFData(res.data);
       });
     }, []);
-
-    console.log({filtereduser})
   
 
   
@@ -140,43 +138,42 @@ const Dash = () => {
 
 
         <main className="col-md-10">
-      <div className="myblogs-container p-4">
-        <h3 className="text-center text-light mt-4 mb-3" style={{ fontWeight: "bold", fontSize: "34px" }}>
-          Scheduled
-        </h3>
-        <div className="container">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>From</th>
-                <th>To</th>
-                <th>Time</th>
-                <th>Vehicle</th>
-              
-              </tr>
-            </thead>
-            <tbody>
-              {filtereduser.map((Schedule) => (
-                <tr key={Schedule._id}>
-                  <td>{Schedule.from}</td>
-                  <td>{Schedule.to}</td>
-                  <td>{Schedule.time}</td>
-                  <td>{Schedule.vechile}</td>
-                 
-                  
-                </tr>
-              ))}
-            </tbody>
-          </table>
+  <div className="myblogs-container p-4">
+    <h3 className="text-center text-light mt-4 mb-3" style={{ fontWeight: "bold", fontSize: "34px" }}>
+      User Profile
+    </h3>
+    <div className="d-flex justify-content-center align-items-center">
+      {filtereduser.map((vechile) => (
+        <div className="col-md-4 mb-4" key={vechile._id} style={{ maxWidth: "300px" }}>
+          <div className="card">
+            <img
+              src={vechile.image}
+              className="card-img-top"
+              alt="User Image"
+              style={{ height: "200px", objectFit: "cover" }}
+            />
+            <div className="card-body">
+              <p className="card-text">
+                <strong>Name:</strong> {vechile.name}
+              </p>
+              <p className="card-text">
+                <strong>Phone :</strong> {vechile.phone}
+              </p>
+              <p className="card-text">
+                <strong>Licence :</strong> {vechile.licence}
+              </p>
+              <p className="card-text">
+                <strong>Email :</strong> {vechile.email}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-      <h3 className="text-center text-light mt-4 mb-3" style={{ fontWeight: "bold", fontSize: "34px" }}>
-          Parking at Manglore KSRTC DEPOT
-        </h3>
+      ))}
+    </div>
+  </div>
+</main>
 
-      </div>
-    </main>
+    
 
         
 

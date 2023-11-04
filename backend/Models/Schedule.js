@@ -2,10 +2,15 @@
 const mongoose = require("mongoose");
 
 const addscheduleSchema = new mongoose.Schema({
-    place: {
+    from: {
       type: String,
       required: [true, " required"],
-      unique: true,
+      
+    },
+    to: {
+      type: String,
+      required: [true, " required"],
+      
     },
     time: {
       type: String,
@@ -19,10 +24,6 @@ const addscheduleSchema = new mongoose.Schema({
       type: String,
       required: [true, "required"],
     },
-    contact : {
-        type: Number,
-        required: [true, "required"],
-      },
    
    
   });

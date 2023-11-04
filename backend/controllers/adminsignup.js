@@ -4,14 +4,14 @@ const bcrypt = require('bcrypt');
 
 module.exports.Adminsignup = async (req, res, next) => {
     try {
-      const { email, name,phone,password,  createdAt } = req.body;
-      console.log({email},{password})
-      const existingUser = await User.findOne({ email });
+      const { Email, Name,Phone,Password,  CreatedAt } = req.body;
+      console.log({Email},{Password})
+      const existingUser = await User.findOne({ Email });
       if (existingUser) {
         return res.json({ message: "User already exists" });
       }
-      const hpassword =  await bcrypt.hash(password, 12);
-      const user = await User.create({ email, name,phone,hpassword,  createdAt });
+      const Hpassword =  await bcrypt.hash(Password, 12);
+      const user = await User.create({ Email, Name,Phone,Hpassword,  CreatedAt });
       const token = createSecretToken(user._id);
       res.cookie("token", token, {
         withCredentials: true,

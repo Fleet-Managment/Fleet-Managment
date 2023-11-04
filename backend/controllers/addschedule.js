@@ -3,11 +3,11 @@ const User = require("../Models/Schedule")
 
 module.exports.Addschedule = async (req, res, next) => {
     try {
-      const {place,time,vechile,driver,contact } = req.body;
+      const {from,to,time,vechile,driver} = req.body;
      
     
       
-      const schedule = await User.create({ place,time,vechile,driver,contact});
+      const schedule = await User.create({ from,to,time,vechile,driver});
       
       
       res

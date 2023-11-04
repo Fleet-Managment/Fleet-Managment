@@ -5,14 +5,14 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, "Your email address is required"],
-    unique: true,
+    
   },
   name: {
     type: String,
     required: [true, "Your Name is required"],
   },
   phone: {
-    type: Number,
+    type: String,
     required: [true, "Your Phone Number is required"],
     
   },
@@ -25,10 +25,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Your password is required"],
   },
+  
  
   createdAt: {
     type: Date,
     default: new Date(),
+  },
+  image: {
+    type: String, // Store the base64 encoded image as a string
   },
 });
 

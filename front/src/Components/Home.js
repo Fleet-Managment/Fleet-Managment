@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import React from 'react'
+
 import 
 {  BsBusFrontFill, BsFillBellFill}
  from 'react-icons/bs'
  import {FaUsers} from 'react-icons/fa'
  import 
- { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
+ {  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
  from 'recharts';
 import axios from "axios";
 
@@ -25,59 +26,86 @@ import {
 import { FaTruckFast } from "react-icons/fa6";
 const Home = () => {
 
+  const [fdata, setFData] = useState([]);
+  const [vdata, setVData] = useState([]);
 
-
-
-
-
-
-  const data = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
  
-const driver = 300
-const vehicle = 50
+
+
+  
+  const [data, setData] = useState([]);
+  const [profits, setProfits] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/data").then((res) => {
+    // setData(res.data);
+    const dataArray = res.data;
+
+      // Calculate profit for each object in the array
+      const calculatedProfits = dataArray.map(item => ({
+        ...item,
+        profit: item.business - item.expenses
+      }));
+
+      // Set the data with profit values in the state
+      setData(calculatedProfits);
+
+      // If you want to store both profit and date
+      const profitsWithDate = calculatedProfits.map(item => ({
+        profit: item.profit,
+        date: item.createdAt // Assuming the date field is called createdAt
+      }));
+
+      setProfits(profitsWithDate);
+    });
+  
+
+
+
+
+       
+      
+      
+    
+  }, []);
+
+
+  console.log({data})
+
+  console.log({profits})
+  
+
+
+
+
+  const Logout = () => {
+    removeCookie("token");
+    navigate("/login");
+  };
+
+
+  // to get drivers count
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/user").then((res) => {
+      setFData(res.data);
+    });
+  }, []);
+
+
+  // to get vechiles
+
+  useEffect(() => {
+    axios.get("http://localhost:4000/vechile").then((res) => {
+      setVData(res.data);
+    });
+  }, []);
+
+
+
+const driver = fdata.length;
+const vehicle = vdata.length;
+
 
 
 
@@ -102,12 +130,10 @@ const vehicle = 50
         { withCredentials: true }
       );
       
-      const { status, user } = data;
-      setUsername(user);
+      const { status, name } = data;
+      setUsername(name);
       return status
-        ?alert(`Hello ${user}`, {
-            position: "top-right",
-          })
+        ?console.log(`Hello ${name}`, )
         : (removeCookie("token"));
     };
     verifyCookie();
@@ -164,7 +190,7 @@ const vehicle = 50
                 </div>
               </a>
             </li>
-            <li className="sidebar-list-item">
+            {/* <li className="sidebar-list-item">
               <a href="alerts" className="text-decoration-none text-white">
                 <div className="sidebar-item">
                   <BsListCheck className="icon" />
@@ -179,7 +205,19 @@ const vehicle = 50
                   <span className="sidebar-text">Settings</span>
                 </div>
               </a>
+            </li> */}
+            <li className="sidebar-list-item">
+              
+                <div className="sidebar-item">
+                 
+                 
+                    <button class="btn btn-outline-success" onClick={Logout}>Logout</button>
+                  
+                </div>
+             
             </li>
+            
+
           </ul>
         </aside>
 
@@ -212,70 +250,36 @@ const vehicle = 50
                 </div>
                 <h1>33</h1>
             </div> */}
-            <div className='card'>
+            {/* <div className='card'>
                 <div className='card-inner'>
                     <h3>ALERTS</h3>
                     <BsFillBellFill className='card_icon'/>
                 </div>
                 <h1>42</h1>
-            </div>
-        </div>
+            </div>*/}
+        </div> 
 
         <div className='charts'>
-            <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-            }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="pv" fill="#8884d8" />
-                <Bar dataKey="uv" fill="#82ca9d" />
-                </BarChart>
-            </ResponsiveContainer>
+        <ResponsiveContainer width="100%" height={300}>
+      <LineChart
+        data={profits}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="date" type="category" />
+        <YAxis dataKey="profit" type="number" />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="profit" stroke="#82ca9d" name="Profit" />
+      </LineChart>
+    </ResponsiveContainer>
+</div>
 
-
-
-
-
-
-
-
-
-
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-                >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                </LineChart>
-            </ResponsiveContainer>
-
-        </div>
    
           
         </main>

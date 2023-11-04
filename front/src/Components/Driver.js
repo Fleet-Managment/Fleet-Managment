@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import {
   BsGrid1X2Fill,
   BsFillArchiveFill,
@@ -15,8 +17,19 @@ function Driver() {
   const [fdata, setFData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filtereduser, setFiltereduser] = useState(fdata);
+  const navigate = useNavigate();
 
+
+  const Logout = () => {
+   
+    navigate("/login");
+  };
+ 
+ 
   const numberOfObjects = fdata.length;
+
+
+  
 
   useEffect(() => {
     const filtered = fdata.filter(
@@ -30,6 +43,10 @@ function Driver() {
   useEffect(() => {
     Axios.get("http://localhost:4000/user").then((res) => {
       setFData(res.data);
+    })
+    .catch((error) => {
+      alert(error);
+      console.error("Error :", error);
     });
   }, []);
 
@@ -86,7 +103,7 @@ function Driver() {
                 </div>
               </a>
             </li>
-            <li className="sidebar-list-item">
+            {/* <li className="sidebar-list-item">
               <a href="alerts" className="text-decoration-none text-white">
                 <div className="sidebar-item">
                   <BsListCheck className="icon" />
@@ -101,6 +118,16 @@ function Driver() {
                   <span className="sidebar-text">Settings</span>
                 </div>
               </a>
+            </li> */}
+            <li className="sidebar-list-item">
+              
+                <div className="sidebar-item">
+                 
+                 
+                    <button class="btn btn-outline-success" onClick={Logout}>Logout</button>
+                  
+                </div>
+             
             </li>
           </ul>
         </aside>
@@ -146,9 +173,7 @@ function Driver() {
             <td>{user.email}</td>
             <td>{user.phone}</td>
             <td>
-              <a href={`/update/${user._id}`} className="btn btn-primary me-2">
-                Update
-              </a>
+              
               <button
                 className="btn btn-danger"
                 onClick={() => handleDelete(user._id)}

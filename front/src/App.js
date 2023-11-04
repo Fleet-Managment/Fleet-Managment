@@ -6,12 +6,15 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 
 import Signup from "./Components/signup";
-import NoPage from "./Components/Nopage";
-import Service from "./Components/services";
+
 import Dash from "./Components/Dash";
-import UpdateBook from "./Components/update";
+import Profile from "./Components/profile";
+import Data from "./Components/data";
+import Text from "./Components/tt";
 
 import Driver from "./Components/Driver";
+
+import Map from "./Components/text";
 import Vechile from "./Components/Vechile";
 import './App.css'
 
@@ -43,9 +46,13 @@ const App=()=>{
           <Route path="vechile" element={<Vechile />} />
           <Route path="schedule" element={<Schedule />} />
           <Route path="dash" element={<Dash />} />
+          <Route path="map" element={<Map />} />
+          <Route path="prof" element={<Profile />} />
+          <Route path="data" element={<Data />} />
+          <Route path="text" element={<Text />} />
             
             
-            <Route path="/update/:id" element={<UpdateBook />} />
+           
             
           
       </Routes>

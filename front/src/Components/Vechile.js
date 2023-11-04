@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import {
     BsGrid1X2Fill,
     BsFillArchiveFill,
@@ -13,6 +15,15 @@ import {
 
 
 const Vechile = () => {
+
+
+
+  const navigate = useNavigate();
+
+  const Logout = () => {
+    
+    navigate("/login");
+  };
 
     const [inputValue, setInputValue] = useState({
         plate: "",
@@ -146,7 +157,7 @@ const Vechile = () => {
                 </div>
               </a>
             </li>
-            <li className="sidebar-list-item">
+            {/* <li className="sidebar-list-item">
               <a href="alerts" className="text-decoration-none text-white">
                 <div className="sidebar-item">
                   <BsListCheck className="icon" />
@@ -161,6 +172,16 @@ const Vechile = () => {
                   <span className="sidebar-text">Settings</span>
                 </div>
               </a>
+            </li> */}
+            <li className="sidebar-list-item">
+              
+                <div className="sidebar-item">
+                 
+                 
+                    <button class="btn btn-outline-success" onClick={Logout}>Logout</button>
+                  
+                </div>
+             
             </li>
           </ul>
         </aside>
